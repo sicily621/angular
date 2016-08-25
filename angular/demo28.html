@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="Controller">
+    <input type="text" ng-model="eqution.x" ng-change="change()"/>
+    <code>{{eqution.output}}</code>
+</div>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+    angular.module('myApp',[]).controller('Controller',function($scope){
+        $scope.eqution={};
+        $scope.change= function () {
+            $scope.eqution.output=parseInt($scope.eqution.x)+2;
+        }
+    })
+</script>
+</body>
+</html>

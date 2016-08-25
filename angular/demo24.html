@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="SomeController">
+    <p>{{someModel.someProperty}}</p>
+    <button ng-click="someAction()">点击</button>
+    <div ng-controller="ChildController">
+        <p>{{someModel.someProperty}}</p>
+        <button ng-click="childAction()">点击</button>
+    </div>
+</div>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+    angular.module('myApp',[]).controller('SomeController',function($scope){
+        $scope.someModel={
+            someProperty:"hello world"
+        };
+        $scope.someAction=function(){
+            $scope.someModel.someProperty="hello human"
+        }
+    }).controller('ChildController',function($scope){
+        $scope.childAction=function(){
+            $scope.someModel.someProperty="hello sicily"
+        }
+    })
+</script>
+</body>
+</html>

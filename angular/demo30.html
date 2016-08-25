@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<my-directive></my-directive>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+    angular.module('myApp',[]).directive('myDirective',myDirective);
+    function myDirective(){
+        var directive={
+            restrict: 'EA',
+            template: '<div>xpy0928{{test}}</div>',
+            link: directiveLink,
+            controller:directiveController
+
+        };
+        return directive;
+    }
+    function directiveController($scope){
+        $scope.test=" 'm from controller";
+    }
+    function directiveLink(scope){
+        scope.test=scope.test+',and from link'
+    }
+</script>
+</body>
+</html>

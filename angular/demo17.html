@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="Controller">
+    <div ng-show="isShow">show div</div>
+    <button ng-click="tabShow()">change</button>
+</div>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+    angular.module('myApp',[]).controller('Controller',function($scope){
+        $scope.isShow=true;
+        $scope.tabShow=function(){
+            $scope.isShow=!$scope.isShow;
+        }
+    })
+</script>
+</body>
+</html>

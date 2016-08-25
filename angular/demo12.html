@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="inputs">
+    <input type="text" name="name" ng-model="name" required ng-change="change(name)"/>
+    <input type="checkbox" ng-model="check"/><a>{{check}}</a>
+    <input type="radio" ng-model="radio"/>
+    <input type="date" ng-model="date"/>
+    <input type="month" ng-model="month"/>
+</div>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+    angular.module('MyApp',[]).controller('inputs',function($scope){
+        $scope.date=new Date('2016-8-15');
+        $scope.month=new Date('2016-8');
+        $scope.change=function(name){
+            console.log(name)
+        }
+    })
+</script>
+</body>
+</html>

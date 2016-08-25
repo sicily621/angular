@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myController">
+    父作用域：<br/>
+    <input type="text" ng-model="name" /><br/>
+    <input type="text" ng-model="sex" /><br/>
+    <input type="button" ng-click="say()" value="点击执行父域的say方法" /><br/>
+    子作用域：<br/>
+    <my-directive my-name="{{name}}" my-sex="sex" get-name='say()'></my-directive><br/>
+</div>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+    var module=angular.module('myApp',[]);
+    module.controller('myController',function($scope){
+        $scope.name='sicily';
+        $scope.sex='girl';
+        $scope.say=function(){
+            alert($scope.name +' is a ' + $scope.sex)
+        }
+    });
+    module.directive('myDirective',function(){
+        return{
+            restrict:"EA",
+            scope:{
+                myName:"@",
+                mySex:"=",
+                getName:"&"
+            },
+            template:"<input type='text' ng-model='myName'/><br/>" +
+            "<input type='text' ng-model='mySex'/><br/>" +
+            "<input type='button' ng-click='getName()' value='点击执行子域的say方法'/>"
+        }
+    })
+</script>
+</body>
+</html>

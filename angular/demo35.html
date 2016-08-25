@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="ServiceController">
+    <label for="username">
+        Type in a GitHub username
+    </label>
+    <input type="text"
+           ng-model="username"
+           placeholder="Enter a GitHub username" id="username"/>
+    <ul>
+        <li ng-repeat="event in events">
+            <!--
+            event.actor and event.repo are returned
+            by the github API. To view the raw
+            API, uncomment the next line:
+            -->
+            <!-- {{ event | json }}-->
+            {{ data }}
+        </li>
+    </ul>
+</div>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+   /* var myApp=angular.module('myApp',[]);
+    myApp.factory('githubServices',function($http){
+        //serviceInstance可以访问$http服务
+        var serviceInstance={};
+        return serviceInstance;
+    })*/
+    angular.module('myApp.services',[]).factory('githubServices',function($http){
+        var githubUrl='https://api.github.com';
+        var runUserServices=function(username,path){
+            return $http({
+                method:"JSONP",
+                url:githubUrl+'/user/'+username+'/'+path+'?callback=JSON_CALLBACK'
+            })
+        };
+        //返回带有一个event的函数的服务对象
+        return{
+            events:function(username){
+                return runUserServices(username,'events')
+            }
+        }
+    });
+    angular.module('myApp',['myApp.services']).controller('ServiceController',function($scope,githubServices){
+       $scope.$watch('username',function(newUsername){
+           githubServices.events(newUsername).success(function(data,status,headers){
+               $scope.data=data;
+           })
+       })
+    })
+</script>
+</body>
+</html>

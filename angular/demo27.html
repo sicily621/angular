@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .odd{background: red;color: #fff;}
+        .even{background: green;color: #fff;}
+    </style>
+</head>
+<body>
+<div ng-controller="Controller">
+    <select ng-model="city" ng-options="city.name for city in cities">
+        <option>Choose city</option>
+    </select>
+</div>
+<script src="js/angular-1.3.0.js"></script>
+<script>
+    angular.module('myApp',[]).controller('Controller',function($scope){
+        $scope.cities=[
+            {name:'里约'},
+            {name:'北京'},
+            {name:'巴黎'}
+        ];
+    })
+</script>
+</body>
+</html>
